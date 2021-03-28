@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RentACar2.API.DTOs;
 using RentACar2.Core.Models;
 using RentACar2.Core.Services;
-using RentACar2.Service.Services;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
