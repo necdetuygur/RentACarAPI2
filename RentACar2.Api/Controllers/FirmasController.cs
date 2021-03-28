@@ -19,12 +19,10 @@ namespace RentACar2.API.Controllers
     {
         private readonly IDapperService<Firma> _dapperFirmaService;
         private readonly IDapperService<Araba> _dapperArabaService;
-        private readonly IMapper _mapper;
-        public FirmasController(IDapperService<Firma> dapperFirmaService, IDapperService<Araba> dapperArabaService, IMapper mapper)
+        public FirmasController(IDapperService<Firma> dapperFirmaService, IDapperService<Araba> dapperArabaService)
         {
             _dapperFirmaService = dapperFirmaService;
             _dapperArabaService = dapperArabaService;
-            _mapper = mapper;
         }
 
         [Authorize]
