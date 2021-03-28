@@ -1,18 +1,18 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using RentACar2.Api.Auth;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using RentACar2.Core.Repositories;
+using RentACar2.Core.Services;
+using RentACar2.Core.UnitOfWorks;
+using RentACar2.Data;
+using RentACar2.Data.Repositories;
+using RentACar2.Data.UnitOfWorks;
 
 namespace RentACar2.Api
 {
@@ -28,12 +28,29 @@ namespace RentACar2.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IService<>), typeof(Service.Services.Service<>));
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            services.AddScoped(typeof(IDapperService<>), typeof(Service.Services.DapperService<>));
+            services.AddScoped(typeof(IDapperRepository<>), typeof(DapperRepository<>));
+            services.AddScoped<IDapperUnitOfWork, DapperUnitOfWork>();
+
+            services.AddDbContext<AppDbContext>(options =>
+            {
+                options.UseSqlServer(Configuration["ConnectionStrings:SqlConnectionString"].ToString(), o =>
+                {
+                    o.MigrationsAssembly("RentACar2.Data");
+                });
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RentACar2.Api", Version = "v1" });
-
+                c.EnableAnnotations();
                 #region Auth
                 c.AddSecurityDefinition("basic", new OpenApiSecurityScheme
                 {

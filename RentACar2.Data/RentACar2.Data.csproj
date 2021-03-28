@@ -19,11 +19,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Configurations\" />
     <Folder Include="Migrations\" />
-    <Folder Include="UnitOfWorks\" />
-    <Folder Include="Seeds\" />
-    <Folder Include="Repositories\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RentACar2.Core\RentACar2.Core.csproj" />
   </ItemGroup>
 
 </Project>

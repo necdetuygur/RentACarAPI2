@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\RentACar2.Core\RentACar2.Core.csproj" />
+    <ProjectReference Include="..\RentACar2.Data\RentACar2.Data.csproj" />
   </ItemGroup>
 
 </Project>
