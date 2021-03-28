@@ -16,12 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="DTOs\" />
-    <Folder Include="Mapping\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\RentACar2.Core\RentACar2.Core.csproj" />
     <ProjectReference Include="..\RentACar2.Data\RentACar2.Data.csproj" />
     <ProjectReference Include="..\RentACar2.Service\RentACar2.Service.csproj" />
